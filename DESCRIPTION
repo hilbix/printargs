@@ -1,0 +1,52 @@
+Like "hello world" but dumps the argc array
+# $Header$
+#
+# $Log$
+# Revision 1.1  2007-10-03 23:41:56  tino
+# First version
+#
+
+There is printenv, but no corresponding printargs.  /bin/echo doesn't
+do the job, as it has options and you cannot tell if args have blanks
+or not.
+
+This Works is placed under the terms of the Copyright Less License,
+see file COPYRIGHT.CLL.  USE AT OWN RISK, ABSOLUTELY NO WARRANTY.
+
+Actually, it does print a little bit more than just args and was
+designed for easy shell usage for argument manipulation and
+transmitting.
+
+The output can be parsed by bourne shells again and is splitted onto
+stdout and stderr, such that you can use following code to save the
+arguments into a single line:
+
+<pre>
+saveargs="`printargs args... 2>/dev/null`"
+...
+eval cmd $saveargs
+</pre>
+
+The full output can be parsed as follows.  However you must be
+prepared that future versions may add more information right before
+the arg0 line:
+
+<pre>
+printargs args... 2>&1 |
+while read -r what arg
+do
+	eval data="$arg"
+	...
+done
+</pre>
+
+Note that printargs prints linefeeds to stderr and not stdout.  This
+behavior is intentional to be able to concatenate argument lists on
+stdout from a loop.
+
+Also note that printargs does not pad arguments with blanks at the
+beginning nor at the end, so you have to add these blanks yourself.
+
+In args chars $, ' and blanks are escaped such that you can easily
+remove those ANSI sequence characters with '| tr -d "\' \$"'.  This
+feature is intentional with a little readability tradeoff.
