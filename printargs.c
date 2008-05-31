@@ -6,6 +6,9 @@
  * see file COPYRIGHT.CLL.  USE AT OWN RISK, ABSOLUTELY NO WARRANTY.
  *
  * $Log$
+ * Revision 1.2  2008-05-31 20:57:54  tino
+ * Output escape fixed
+ *
  * Revision 1.1  2007-10-03 23:41:56  tino
  * First version
  *
@@ -70,7 +73,7 @@ outs(const char *s)
 static void
 outul_n(unsigned long u, unsigned base, int len)
 {
-  if ((u/base)>0 || --len>0)
+  if (--len>0 || (u/base)>0)
     outul_n(u/base, base, len);
   outc("0123456789abcdef"[u%base]);
 }

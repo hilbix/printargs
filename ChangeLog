@@ -1,0 +1,4 @@
+2008-05-31  Valentin Hilbig  <tino@firebird.03.softkill.net>
+
+	* printargs.c (outul_n): fixed, the recoursion was done too late
+	such that too many octal digits were output.
