@@ -1,3 +1,2 @@
-Bugfix: ANSI escape fixed, the octal sequence was too long for most
-control characters (hadn't tested this before).
-
+Announcements are now in the git commit log:
+git log --follow VERSION

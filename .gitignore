@@ -1,0 +1,5 @@
+*.d
+*.o
+*~
+printargs
+printargs_version.h
